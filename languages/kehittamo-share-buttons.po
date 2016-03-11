@@ -1,0 +1,170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Kehittamo Share Buttons\n"
+"POT-Creation-Date: 2016-03-11 15:39+0200\n"
+"PO-Revision-Date: 2016-03-11 15:39+0200\n"
+"Last-Translator: Janne Saarela <janne.saarela@kehittamo.fi>\n"
+"Language-Team: Janne Saarela <janne.saarela@kehittamo.fi>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/kehittamo-share-buttons-admin.php:31
+#: includes/kehittamo-share-buttons-admin.php:32
+msgid "Share Buttons"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:49
+msgid "Share Buttons Settings"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:75
+msgid "General settings"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:82
+msgid "Show share buttons at the top of posts?"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:89
+msgid "Show share buttons at the bottom of posts?"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-frontend.php:60
+#: includes/kehittamo-share-buttons-frontend.php:68
+msgid "Share This on Facebook"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-frontend.php:61
+#: includes/kehittamo-share-buttons-frontend.php:69
+msgid "Share This on Twitter"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-frontend.php:62
+#: includes/kehittamo-share-buttons-frontend.php:70
+msgid "Share This on Whatsapp"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-frontend.php:92
+msgid "shares"
+msgstr ""
+
+#~ msgid "Share Buttons Widget"
+#~ msgstr "Ajankohtaista syötteen vimpain"
+
+#~ msgid "Social Media"
+#~ msgstr "Sosiaalinen media"
+
+#~ msgid "RSS Media"
+#~ msgstr "RSS syöte"
+
+#~ msgid "Title:"
+#~ msgstr "Otsikko:"
+
+#~ msgid "Tab one title:"
+#~ msgstr "1. välilehden otsikko:"
+
+#~ msgid "Tab one type:"
+#~ msgstr "1. välilehden sisältötyyppi:"
+
+#~ msgid "Social media"
+#~ msgstr "Sosiaalisen median lähteet"
+
+#~ msgid "RSS media"
+#~ msgstr "RSS syötteet"
+
+#~ msgid "Tab two title:"
+#~ msgstr "2. välilehden otsikko:"
+
+#~ msgid "Tab two type:"
+#~ msgstr "2. välilehden sisältötyyppi:"
+
+#~ msgid "Buttons ID:"
+#~ msgstr "Syötteen tunniste:"
+
+#~ msgid "Enter your activity feed id."
+#~ msgstr "Lisää syötteesi tunniste."
+
+#~ msgctxt "%s = human-readable time difference"
+#~ msgid "%s ago"
+#~ msgstr "%s sitten"
+
+#~ msgid "Use Global Styles"
+#~ msgstr "Käytä lisosan tyylejä"
+
+#~ msgid "Title Length:"
+#~ msgstr "Otsikon maksimipituus:"
+
+#~ msgid "Enter the number of characters, after which the title is being cut."
+#~ msgstr "Anna merkkimäärä, jonka jälkeen otsikko katkaistaan."
+
+#~ msgid "Excerpt Length:"
+#~ msgstr "Kuinka monta merkkiä otteesta näytetään?"
+
+#~ msgid ""
+#~ "Enter the number of characters, after which the excerpt is being cut."
+#~ msgstr ""
+#~ "Anna merkkimäärä, jonka jälkeen ote katkaistaan. Jätä tyhjäksi, mikäli et "
+#~ "halua näyttää otetta."
+
+#~ msgid "Columns:"
+#~ msgstr "Palstat:"
+
+#~ msgid "Rows:"
+#~ msgstr "Rivit:"
+
+#~ msgid "Thumbnail Size:"
+#~ msgstr "Kuvan koko, jos teksti kuvan alla"
+
+#~ msgid "Full Size"
+#~ msgstr "Täysikokoinen"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Pikkukuva"
+
+#~ msgid "Disable overlay"
+#~ msgstr "Siirrä teksti kuvan alle"
+
+#~ msgid "Hide date"
+#~ msgstr "Piilota päivämäärä"
+
+#~ msgid "Hide category"
+#~ msgstr "Piilota kategoria"
+
+#~ msgid "Recent posts:"
+#~ msgstr "Uusimmat:"
+
+#~ msgid "Custom order:"
+#~ msgstr "Oma järjestys:"
+
+#~ msgid "Add new post:"
+#~ msgstr "Lisää uusi kirjoitus:"
+
+#~ msgid "Just start typing or press space bar. Remember to save your changes."
+#~ msgstr ""
+#~ "Aloita kirjoittaminen tai paina välilyöntiä. Muista lopuksi tallentaa "
+#~ "muutokset"
+
+#~ msgid "Category:"
+#~ msgstr "Kategoria:"
+
+#~ msgid "All categories"
+#~ msgstr "Kaikki kategoriat"
+
+#~ msgid "Offset:"
+#~ msgstr "Siirtymä:"
+
+#~ msgid "Number of posts to skip from the start (0-20)."
+#~ msgstr "Kuinka monta kirjoitusta jätetään väliin (0-20)."
+
+#~ msgid "Show date"
+#~ msgstr "Näytä päivämäärä"
