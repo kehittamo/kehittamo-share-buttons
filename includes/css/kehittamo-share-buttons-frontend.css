@@ -48,6 +48,11 @@
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap; }
+    .share-buttons-block .btn > span {
+      display: none; }
+      @media (min-width: 480px) {
+        .share-buttons-block .btn > span {
+          display: inline-block; } }
     .share-buttons-block .btn:hover, .share-buttons-block .btn:active, .share-buttons-block .btn:focus, .share-buttons-block .btn:active:hover, .share-buttons-block .btn:active:focus {
       color: #ffffff; }
     @media (min-width: 1024px) {

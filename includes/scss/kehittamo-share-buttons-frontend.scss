@@ -96,6 +96,12 @@ $whatsapp-color: #43d854;
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+    > span{
+      display: none;
+      @include xsplus{
+        display: inline-block;
+      }
+    }
     &:hover, &:active, &:focus, &:active:hover, &:active:focus{
       color: $base-color;
     }
