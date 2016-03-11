@@ -44,8 +44,13 @@ $whatsapp-color: #43d854;
 .share-buttons-block{
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem 0;
   width: 100%;
+  &.top{
+    margin: 1rem 0;
+  }
+  &.bottom{
+    margin: 3rem 0;
+  }
   > * {
     align-self: center;
     flex-grow: 1;
@@ -124,6 +129,10 @@ $whatsapp-color: #43d854;
     }
     > i{
       color: $base-color;
+      display: block;
+      @include xsplus{
+        display: inline;
+      }
     }
   }
 
