@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kehittamo Share Buttons\n"
 "POT-Creation-Date: 2016-03-11 15:39+0200\n"
-"PO-Revision-Date: 2016-03-11 15:39+0200\n"
+"PO-Revision-Date: 2016-03-11 16:32+0200\n"
 "Last-Translator: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language-Team: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language: fi\n"
@@ -37,7 +37,7 @@ msgstr "Näytä jakonapit artikkelin yläosassa?"
 
 #: includes/kehittamo-share-buttons-admin.php:89
 msgid "Show share buttons at the bottom of posts?"
-msgstr "Näytä jakonapit ja jakotilastot artikkelit artikkelin alaosassa?"
+msgstr "Näytä jakonapit ja jakotilastot artikkelin alaosassa?"
 
 #: includes/kehittamo-share-buttons-frontend.php:60
 #: includes/kehittamo-share-buttons-frontend.php:68
