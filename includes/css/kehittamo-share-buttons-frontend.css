@@ -1,5 +1,6 @@
 .share-buttons-block {
   display: flex;
+  font-family: 'Avenir', 'Arial', 'sans-serif';
   flex-wrap: wrap;
   margin: 1rem 0;
   width: 100%; }
@@ -12,7 +13,6 @@
     border-right: none;
     flex: 1;
     flex-basis: 100%;
-    font-family: 'Avenir', 'Arial', 'sans-serif';
     font-size: 70px;
     line-height: 1;
     text-align: center; }
@@ -34,7 +34,7 @@
     color: #ffffff;
     cursor: pointer;
     display: inline-block;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: normal;
     flex: 1;
     line-height: 1.5;
