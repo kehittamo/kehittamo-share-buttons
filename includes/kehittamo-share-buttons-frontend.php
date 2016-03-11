@@ -59,7 +59,7 @@ class FrontEnd{
         $new_content_top .= "<div class='share-buttons-block top'>";
           $new_content_top .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><i class='kaf-icon kaf-icon-facebook-squared'></i>Facebook</a>";
           $new_content_top .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . "&text=" . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-twitter'></i>Twitter</a>";
-          $new_content_top .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-whatsapp'></i>Whatsapp</a>";
+          $new_content_top .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . "?" . $url . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-whatsapp'></i>Whatsapp</a>";
         $new_content_top .= "</div>";
       }
       if( $bottom ){
@@ -67,7 +67,7 @@ class FrontEnd{
           $new_content_bottom .= $this->get_share_counts_html( $id, $url );
           $new_content_bottom .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><i class='kaf-icon kaf-icon-facebook-squared'></i>Facebook</a>";
           $new_content_bottom .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . "&text=" . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-twitter'></i>Twitter</a>";
-          $new_content_bottom .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-whatsapp'></i>Whatsapp</a>";
+          $new_content_bottom .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . "?" . $url . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><i class='kaf-icon kaf-icon-whatsapp'></i>Whatsapp</a>";
         $new_content_bottom .= "</div>";
       }
       $new_content .= $new_content_top;
