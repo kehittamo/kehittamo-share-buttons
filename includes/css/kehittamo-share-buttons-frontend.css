@@ -72,7 +72,7 @@
       background-color: #43d854; }
       .share-buttons-block .btn.whatsapp:hover, .share-buttons-block .btn.whatsapp:active, .share-buttons-block .btn.whatsapp:focus {
         background-color: #58dc67; }
-      @media (min-width: 769px) {
+      @media (min-width: 768px) {
         .share-buttons-block .btn.whatsapp {
           display: none; } }
     .share-buttons-block .btn > i {

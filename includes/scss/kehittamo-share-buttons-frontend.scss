@@ -128,7 +128,7 @@ $whatsapp-color: #43d854;
       &:hover, &:active, &:focus{
         background-color: lighten($whatsapp-color, 5);
       }
-      @include smplusone{
+      @include smplus{
         display: none;
       }
     }
