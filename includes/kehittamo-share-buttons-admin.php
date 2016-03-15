@@ -39,14 +39,13 @@ class SettingsPage
     /**
      * Options page callback
      */
-    public function create_admin_page()
-    {
+    public function create_admin_page(){
         // Set class property
-        $this->options = get_option( 'kehittamo_share_buttons_settings' );
+        $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
         ?>
         <div class="wrap">
             <?php screen_icon(); ?>
-            <h2><?php _e('Share Buttons Settings', 'kehittamo-share-buttons') ?></h2>
+            <h2><?php _e( 'Share Buttons Settings', 'kehittamo-share-buttons' ) ?></h2>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
@@ -66,7 +65,7 @@ class SettingsPage
     {
         register_setting(
             'kehittamo_share_buttons_settings_group', // Option group
-            'kehittamo_share_buttons_settings', // Option name
+            SHARE_BUTTONS_SETTINGS_NAME, // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
@@ -78,14 +77,14 @@ class SettingsPage
         );
 
         add_settings_field(
-            'share_buttons_visible_post_top', // ID
+            SHARE_BUTTONS_VISIBLE_POST_TOP, // ID
               __( 'Show share buttons at the top of posts?', 'kehittamo-share-buttons' ), // Title
             array( $this, 'share_buttons_visible_post_top_callback' ), // Callback
             'kehittamo-share-buttons-admin', // Page
             'kehittamo_share_buttons_default' // Section
         );
         add_settings_field(
-            'share_buttons_visible_post_bottom', // ID
+            SHARE_BUTTONS_VISIBLE_POST_BOTTOM, // ID
               __( 'Show share buttons at the bottom of posts?', 'kehittamo-share-buttons' ), // Title
             array( $this, 'share_buttons_visible_post_bottom_callback' ), // Callback
             'kehittamo-share-buttons-admin', // Page
@@ -98,14 +97,13 @@ class SettingsPage
      *
      * @param array $input Contains all settings fields as array keys
      */
-    public function sanitize( $input )
-    {
+    public function sanitize( $input ){
         $new_input = array();
-        if( isset( $input['share_buttons_visible_post_top'] ) ){
-          $new_input['share_buttons_visible_post_top'] = absint( $input['share_buttons_visible_post_top'] );
+        if( isset( $input[SHARE_BUTTONS_VISIBLE_POST_TOP] ) ){
+          $new_input[SHARE_BUTTONS_VISIBLE_POST_TOP] = absint( $input[SHARE_BUTTONS_VISIBLE_POST_TOP] );
         }
-        if( isset( $input['share_buttons_visible_post_bottom'] ) ){
-          $new_input['share_buttons_visible_post_bottom'] = absint( $input['share_buttons_visible_post_bottom'] );
+        if( isset( $input[SHARE_BUTTONS_VISIBLE_POST_BOTTOM] ) ){
+          $new_input[SHARE_BUTTONS_VISIBLE_POST_BOTTOM] = absint( $input[SHARE_BUTTONS_VISIBLE_POST_BOTTOM] );
         }
 
         return $new_input;
@@ -114,18 +112,15 @@ class SettingsPage
     /**
      * Print the Section text
      */
-    public function print_section_info(){
-    }
+    public function print_section_info(){}
 
     /**
      * Print share_buttons_visible_post_top
      */
     public function share_buttons_visible_post_top_callback(){
-        printf(
-
-            '<input type="checkbox" id="share_buttons_visible_post_top" name="kehittamo_share_buttons_settings[share_buttons_visible_post_top]" value="1"' . checked( 1, $this->options['share_buttons_visible_post_top'], false ) . '/>'
-
-        );
+      printf(
+        '<input type="checkbox" id="' . SHARE_BUTTONS_VISIBLE_POST_TOP . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_VISIBLE_POST_TOP . ']" value="1"' . checked( 1, $this->options[SHARE_BUTTONS_VISIBLE_POST_TOP], false ) . '/>'
+      );
     }
 
     /**
@@ -134,7 +129,7 @@ class SettingsPage
     public function share_buttons_visible_post_bottom_callback(){
         printf(
 
-            '<input type="checkbox" id="share_buttons_visible_post_bottom" name="kehittamo_share_buttons_settings[share_buttons_visible_post_bottom]" value="1"' . checked( 1, $this->options['share_buttons_visible_post_bottom'], false ) . '/>'
+            '<input type="checkbox" id="' . SHARE_BUTTONS_VISIBLE_POST_BOTTOM . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_VISIBLE_POST_BOTTOM . ']" value="1"' . checked( 1, $this->options[SHARE_BUTTONS_VISIBLE_POST_BOTTOM], false ) . '/>'
 
         );
     }

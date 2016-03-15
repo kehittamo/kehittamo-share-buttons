@@ -14,7 +14,7 @@ class FrontEnd{
      */
     public function __construct(){
       // Set options
-      $this->options = get_option( 'kehittamo_share_buttons_settings' );
+      $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
       add_filter( 'the_content' , array( $this, 'maybe_add_share_buttons' ), 10, 1 );
     }
 
@@ -27,8 +27,8 @@ class FrontEnd{
       if( ! is_singular() || ! is_singular( 'post' ) || ! in_array( 'the_content', $wp_current_filter ) || !$this->options ) {
         return $content;
       }
-      $top = $this->options[ 'share_buttons_visible_post_top' ];
-      $bottom = $this->options[ 'share_buttons_visible_post_bottom' ];
+      $top = $this->options[ SHARE_BUTTONS_VISIBLE_POST_TOP ];
+      $bottom = $this->options[ SHARE_BUTTONS_VISIBLE_POST_BOTTOM ];
       $new_content = $content;
 
       if( in_the_loop() && ( $top || $bottom ) ){
