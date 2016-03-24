@@ -16,7 +16,32 @@ class FrontEnd{
       // Set options
       $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
       add_filter( 'the_content' , array( $this, 'maybe_add_share_buttons' ), 10, 1 );
+      add_shortcode( 'share-buttons', array( $this, 'sharebuttons_func' ) );
     }
+
+
+    /**
+     *  Shortcode
+     *  @param $atts    parameters
+     */
+    public function sharebuttons_func( $atts = array() ) {
+       extract( shortcode_atts(array(
+               'hide_counter' => 'false'
+           ), $atts));
+
+      if ( $hide_counter == 'true' ) {
+        $top = true;
+        $bottom = false;
+      } else {
+        $top = false;
+        $bottom = true;
+      }
+      $content = '';
+      $shortcode_html = $this->add_buttons( get_the_ID(), get_the_permalink(), get_the_title(), $content, $top, $bottom );
+
+      return $shortcode_html;
+    }
+
 
     /**
      * Maybe add share buttons to post
