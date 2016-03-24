@@ -32,6 +32,7 @@ namespace Kehittamo\Plugins\ShareButtons;
 	define( 'Kehittamo\Plugins\ShareButtons\PLUGIN_URL', plugin_dir_url( __FILE__ ) );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SLUG', 'kehittamo-share-buttons' );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_NAME', 'kehittamo_share_buttons_settings' );
+  define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_PAGE_NAME', 'kehittamo-share-buttons-admin' );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_TOP', 'share_buttons_visible_post_top' );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
 
@@ -146,14 +147,14 @@ namespace Kehittamo\Plugins\ShareButtons;
      * Load Admin Javascript and Styles
      */
     function admin_enqueue_scripts( $hook ){
+      $screen = get_current_screen();
+      if( is_admin() && $screen && 'settings_page_' . SHARE_BUTTONS_SETTINGS_PAGE_NAME == $screen->id ){
 
-      // if( is_admin() AND 'widgets.php' == $hook ){
-      //
-      //   // CSS Styles
-      //   wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.css' );
-      //   wp_enqueue_style( 'kehittamo-share-buttons-admin' );
-      //
-      // }
+        // CSS Styles
+        wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.css' );
+        wp_enqueue_style( 'kehittamo-share-buttons-admin' );
+
+      }
 
 
     }
