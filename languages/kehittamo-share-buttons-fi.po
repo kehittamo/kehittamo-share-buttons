@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kehittamo Share Buttons\n"
-"POT-Creation-Date: 2016-03-11 15:39+0200\n"
-"PO-Revision-Date: 2016-03-11 16:32+0200\n"
+"POT-Creation-Date: 2016-03-24 10:00+0200\n"
+"PO-Revision-Date: 2016-03-24 10:06+0200\n"
 "Last-Translator: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language-Team: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language: fi\n"
@@ -18,45 +18,68 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/kehittamo-share-buttons-admin.php:31
-#: includes/kehittamo-share-buttons-admin.php:32
+#: includes/kehittamo-share-buttons-admin.php:27
+#: includes/kehittamo-share-buttons-admin.php:28
 msgid "Share Buttons"
 msgstr "Sosiaalisen median jakonapit"
 
-#: includes/kehittamo-share-buttons-admin.php:49
+#: includes/kehittamo-share-buttons-admin.php:44
 msgid "Share Buttons Settings"
 msgstr "Sosiaalisen median jakonappien asetukset"
 
-#: includes/kehittamo-share-buttons-admin.php:75
-msgid "General settings"
-msgstr "Yleiset asetukset"
+#: includes/kehittamo-share-buttons-admin.php:69
+msgid "Info"
+msgstr "Info"
 
-#: includes/kehittamo-share-buttons-admin.php:82
+#: includes/kehittamo-share-buttons-admin.php:76
 msgid "Show share buttons at the top of posts?"
 msgstr "Näytä jakonapit artikkelin yläosassa?"
 
-#: includes/kehittamo-share-buttons-admin.php:89
+#: includes/kehittamo-share-buttons-admin.php:83
 msgid "Show share buttons at the bottom of posts?"
 msgstr "Näytä jakonapit ja jakotilastot artikkelin alaosassa?"
 
-#: includes/kehittamo-share-buttons-frontend.php:60
-#: includes/kehittamo-share-buttons-frontend.php:68
+#: includes/kehittamo-share-buttons-admin.php:112
+msgid ""
+"By default share buttons are set in to the posts top and bottom. <br /> You "
+"can choose to hide share buttons from top or/and bottom if you want."
+msgstr ""
+"Oletuksena jakonapit näytetään artikkelin ylä- ja alaosassa. <br /> Voit "
+"piilottaa jakonapit halutessasi artikkelin ylä- tai/ja alaosasta."
+
+#: includes/kehittamo-share-buttons-admin.php:113
+msgid "You can add share buttons to other content too via shortcode: "
+msgstr "Voit lisätä jakonapit myös shortcoden avulla: "
+
+#: includes/kehittamo-share-buttons-admin.php:115
+msgid ""
+"By default shortcode add buttons with share count. If you want to add "
+"buttons without share counts, use:"
+msgstr ""
+"Oletuksena shortcode lisää jakonapit ja jakomäärän. Jos haluat lisätä vain "
+"jakonapit, käytä tätä shortcodea:"
+
+#: includes/kehittamo-share-buttons-frontend.php:86
+#: includes/kehittamo-share-buttons-frontend.php:94
 msgid "Share This on Facebook"
 msgstr "Jaa Facebookissa"
 
-#: includes/kehittamo-share-buttons-frontend.php:61
-#: includes/kehittamo-share-buttons-frontend.php:69
+#: includes/kehittamo-share-buttons-frontend.php:87
+#: includes/kehittamo-share-buttons-frontend.php:95
 msgid "Share This on Twitter"
 msgstr "Jaa Twitterissä"
 
-#: includes/kehittamo-share-buttons-frontend.php:62
-#: includes/kehittamo-share-buttons-frontend.php:70
+#: includes/kehittamo-share-buttons-frontend.php:88
+#: includes/kehittamo-share-buttons-frontend.php:96
 msgid "Share This on Whatsapp"
 msgstr "Jaa Whatsappissa"
 
-#: includes/kehittamo-share-buttons-frontend.php:92
+#: includes/kehittamo-share-buttons-frontend.php:118
 msgid "shares"
 msgstr "jakoa"
+
+#~ msgid "General settings"
+#~ msgstr "Yleiset asetukset"
 
 #~ msgid "Share Buttons Widget"
 #~ msgstr "Ajankohtaista syötteen vimpain"
