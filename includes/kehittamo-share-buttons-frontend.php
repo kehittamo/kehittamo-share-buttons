@@ -45,6 +45,7 @@ class FrontEnd{
 
     /**
      * Maybe add share buttons to post
+     * @param $content post content
      */
     public function maybe_add_share_buttons( $content ) {
       global $wp_current_filter;
@@ -112,7 +113,7 @@ class FrontEnd{
      * @return string html sharecount h1 element
      */
     private function get_share_counts_html( $id, $url ){
-      $total_share_count = $this->get_share_counts( $id, $url, false, true );
+      $total_share_count = $this->get_share_counts( $id, $url );
       $html = '';
       $html .= "<h1>" . $total_share_count . "<span class='total-share-count-text'>" . __( 'shares', SHARE_BUTTONS_SLUG ) . "</span></h1>";
       return $html;
