@@ -25,21 +25,27 @@ class FrontEnd{
      *  @param $atts    parameters
      */
     public function sharebuttons_func( $atts = array() ) {
-       extract( shortcode_atts(array(
-               'hide_counter' => 'false'
-           ), $atts));
+      extract(
+        shortcode_atts(
+          array(
+            'hide_counter' => 'false'
+          ),
+        $atts )
+      );
+
+      $top = false;
+      $bottom = true;
 
       if ( $hide_counter == 'true' ) {
         $top = true;
         $bottom = false;
-      } else {
-        $top = false;
-        $bottom = true;
       }
+
       $content = '';
       $shortcode_html = $this->add_buttons( get_the_ID(), get_the_permalink(), get_the_title(), $content, $top, $bottom );
 
       return $shortcode_html;
+
     }
 
 
@@ -135,10 +141,11 @@ class FrontEnd{
       if( is_string( $total_shares_count_cache = get_transient( 'total_shares_count_' . $id ) )) {
         return $total_shares_count_cache;
       }
-
-      $twitter_json = $this->get_data( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $escaped_url );
-      $twitter_obj = json_decode( $twitter_json );
-      $twitter_shares = $twitter_obj->count ? $twitter_obj->count : '0';
+      // Disable Twitter for now because they do not have this endpoint anymore
+      // $twitter_json = $this->get_data( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $escaped_url );
+      // $twitter_obj = json_decode( $twitter_json );
+      // $twitter_shares = $twitter_obj->count ? $twitter_obj->count : '0';
+      $twitter_shares = '0';
       $total_share_count = $twitter_shares;
 
       $facebook_json = $this->get_data( 'https://api.facebook.com/method/links.getStats?format=json&urls=' . $escaped_url );
@@ -151,6 +158,9 @@ class FrontEnd{
 
       // Set 5min cache
       set_transient( 'total_shares_count_' . $id, $total_share_count, 60 * 5 );
+
+      // Add share count to post meta so the data can be used also elswhere
+      update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY,  $total_share_count );
 
       return $total_share_count;
 
