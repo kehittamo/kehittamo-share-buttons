@@ -35,6 +35,7 @@ namespace Kehittamo\Plugins\ShareButtons;
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_PAGE_NAME', 'kehittamo-share-buttons-admin' );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_TOP', 'share_buttons_visible_post_top' );
   define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
+  define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_POST_META_KEY', 'kehittamo_share_buttons_post_share_count' );
 
 	class Load{
 
