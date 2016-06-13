@@ -1,0 +1,10 @@
+{
+    "name": "kehittamo/kehittamo-share-buttons",
+    "version": "master",
+    "type": "wordpress-plugin",
+    "source": {
+        "url": "https://bitbucket.org/kehittamo/kehittamo-share-buttons.git",
+        "type": "git",
+        "reference": "master"
+    }
+}
