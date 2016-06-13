@@ -159,7 +159,6 @@ class FrontEnd{
     preg_match( $re, $escaped_url, $matched_url );
     if( sizeof( $matched_url ) === 2 ){
       $escaped_url = "http://$matched_url[1]?kehittamo_share_count_protocol=http" . ",https://$matched_url[1]?kehittamo_share_count_protocol=https";
-      error_log(print_r($escaped_url, TRUE));
     }
     if( $escaped_url && $id ) :
       if( is_string( $total_shares_count_cache = get_transient( 'total_shares_count_' . $id ) )) {
@@ -174,11 +173,11 @@ class FrontEnd{
       $total_share_count = '0';
       $facebook_json = $this->get_data( 'https://api.facebook.com/method/links.getStats?format=json&urls=' . $escaped_url );
       $facebook_obj = json_decode( $facebook_json );
-      if( is_array( $facebook_obj ) && sizeof( $facebook_obj ) > 1 ){
+      if( is_array( $facebook_obj ) && sizeof( $facebook_obj ) === 2 ){
         foreach ( $facebook_obj as $object ) {
-          $fb_shares += isset( $object->share_count ) ? $object->share_count : '0';
-          $fb_comments += isset( $object->commentsbox_count ) ? $object->commentsbox_count : '0';
-          $fb_likes += isset( $object->like_count ) ? $object->like_count : '0';
+          $fb_shares += ( isset( $object->share_count ) && $object->share_count !== $fb_shares ) ? $object->share_count : '0';
+          $fb_comments += ( isset( $object->commentsbox_count ) && $object->commentsbox_count !== $fb_comments ) ? $object->commentsbox_count : '0';
+          $fb_likes += ( isset( $object->like_count ) && $object->like_count !== $fb_likes ) ? $object->like_count : '0';
         }
       } else {
         $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
