@@ -158,7 +158,7 @@ class FrontEnd{
     $re = "/^https?:\\/\\/(.{1,})/";
     preg_match( $re, $escaped_url, $matched_url );
     if( sizeof( $matched_url ) === 2 ){
-      $escaped_url = "http://$matched_url[1]?kehittamo_share_count_protocol=http" . ",https://$matched_url[1]?kehittamo_share_count_protocol=https";
+      $escaped_url = "http://$matched_url[1]" . ",https://$matched_url[1]";
     }
     if( $escaped_url && $id ) :
       if( is_string( $total_shares_count_cache = get_transient( 'total_shares_count_' . $id ) )) {
