@@ -40,7 +40,6 @@ class SettingsPage{
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
         ?>
         <div class="wrap kehittamo-share-buttons">
-            <?php screen_icon(); ?>
             <h2><?php _e( 'Share Buttons Settings', 'kehittamo-share-buttons' ) ?></h2>
             <form method="post" action="options.php">
             <?php
