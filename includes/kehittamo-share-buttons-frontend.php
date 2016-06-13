@@ -154,6 +154,12 @@ class FrontEnd{
   public function get_share_counts( $id, $url ){
 
     $escaped_url = esc_url( $url );
+    // Get share count to http and https urls
+    $re = "/^https?:\\/\\/(.{1,})/";
+    preg_match( $re, $escaped_url, $matched_url );
+    if( sizeof( $matched_url ) === 2 ){
+      $escaped_url = "http://$matched_url[1]" . ",https://$matched_url[1]";
+    }
     if( $escaped_url && $id ) :
       if( is_string( $total_shares_count_cache = get_transient( 'total_shares_count_' . $id ) )) {
         return $total_shares_count_cache;
@@ -162,15 +168,24 @@ class FrontEnd{
       // $twitter_json = $this->get_data( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $escaped_url );
       // $twitter_obj = json_decode( $twitter_json );
       // $twitter_shares = $twitter_obj->count ? $twitter_obj->count : '0';
-      $twitter_shares = '0';
-      $total_share_count = $twitter_shares;
-
+      // $twitter_shares = '0';
+      // $total_share_count = $twitter_shares;
+      $total_share_count = '0';
       $facebook_json = $this->get_data( 'https://api.facebook.com/method/links.getStats?format=json&urls=' . $escaped_url );
       $facebook_obj = json_decode( $facebook_json );
-      $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
-      $fb_shares = isset( $facebook_obj->share_count ) ? $facebook_obj->share_count : '0';
-      $fb_comments = isset( $facebook_obj->commentsbox_count ) ? $facebook_obj->commentsbox_count : '0';
-      $fb_likes = isset( $facebook_obj->like_count ) ? $facebook_obj->like_count : '0';
+      if( is_array( $facebook_obj ) && sizeof( $facebook_obj ) > 1 ){
+        foreach ( $facebook_obj as $object ) {
+          $fb_shares += isset( $object->share_count ) ? $object->share_count : '0';
+          $fb_comments += isset( $object->commentsbox_count ) ? $object->commentsbox_count : '0';
+          $fb_likes += isset( $object->like_count ) ? $object->like_count : '0';
+        }
+      } else {
+        $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
+        $fb_shares = isset( $facebook_obj->share_count ) ? $facebook_obj->share_count : '0';
+        $fb_comments = isset( $facebook_obj->commentsbox_count ) ? $facebook_obj->commentsbox_count : '0';
+        $fb_likes = isset( $facebook_obj->like_count ) ? $facebook_obj->like_count : '0';
+      }
+
       $total_share_count = $total_share_count + $fb_shares + $fb_likes;
 
       // Set 5min cache
