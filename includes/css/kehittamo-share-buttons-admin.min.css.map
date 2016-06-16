@@ -1,0 +1,1 @@
+{"version":3,"sources":["kehittamo-share-buttons-admin.scss"],"names":[],"mappings":"AAAA,+BAEI,6BAA8B,AAC9B,mBAAoB,AACpB,mBAAqB,CACtB","file":"kehittamo-share-buttons-admin.min.css","sourcesContent":[".kehittamo-share-buttons{\n  &__info{\n    border-bottom: 3px solid #444;\n    margin-bottom: 1rem;\n    padding-bottom: 2rem;\n  }\n}\n"],"sourceRoot":"/source/"}

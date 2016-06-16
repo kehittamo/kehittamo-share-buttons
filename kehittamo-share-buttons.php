@@ -125,12 +125,12 @@ namespace Kehittamo\Plugins\ShareButtons;
       $options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
       if( $options ) {
         // Javascript
-        wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL .'includes/js/kehittamo-share-buttons.js', array( 'jquery' ), null, true );
+        wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL .'includes/js/kehittamo-share-buttons.min.js', array( 'jquery' ), null, true );
         wp_enqueue_script( 'kehittamo-share-buttons' );
 
         //CSS Styles
         wp_register_style( 'kehittamo-share-buttons-icons', PLUGIN_URL .'includes/css/kehittamo-share-buttons-icons.css' );
-        wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL .'includes/css/kehittamo-share-buttons-frontend.css' );
+        wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL .'includes/css/kehittamo-share-buttons-frontend.min.css' );
         wp_enqueue_style( 'kehittamo-share-buttons-frontend' );
         wp_enqueue_style( 'kehittamo-share-buttons-icons' );
       }
@@ -152,7 +152,7 @@ namespace Kehittamo\Plugins\ShareButtons;
       if( is_admin() && $screen && 'settings_page_' . SHARE_BUTTONS_SETTINGS_PAGE_NAME == $screen->id ){
 
         // CSS Styles
-        wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.css' );
+        wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.min.css' );
         wp_enqueue_style( 'kehittamo-share-buttons-admin' );
 
       }
