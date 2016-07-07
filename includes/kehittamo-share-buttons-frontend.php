@@ -56,7 +56,7 @@ class FrontEnd{
     public function maybe_add_share_buttons( $content ) {
       global $wp_current_filter;
 
-      if( ! is_singular() || ! is_singular( 'post' ) || ! in_array( 'the_content', $wp_current_filter ) || !$this->options ) {
+      if( ! is_singular() || ! is_singular( 'post' ) || ! in_array( 'the_content', $wp_current_filter ) || in_array( 'get_the_excerpt', $wp_current_filter ) || !$this->options ) {
         return $content;
       }
       $top = $this->options[ SHARE_BUTTONS_VISIBLE_POST_TOP ];
