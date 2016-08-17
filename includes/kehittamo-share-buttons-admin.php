@@ -24,8 +24,8 @@ class SettingsPage {
 
         // This page will be under "Settings"
         add_options_page(
-            __( 'Share Buttons', 'kehittamo-share-buttons' ),
-            __( 'Share Buttons', 'kehittamo-share-buttons' ),
+            __( 'Share Buttons', SHARE_BUTTONS_SLUG ),
+            __( 'Share Buttons', SHARE_BUTTONS_SLUG ),
             'manage_options',
             SHARE_BUTTONS_SETTINGS_PAGE_NAME,
             array( $this, 'create_admin_page' )
@@ -40,7 +40,7 @@ class SettingsPage {
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
         ?>
         <div class="wrap kehittamo-share-buttons">
-            <h2><?php _e( 'Share Buttons Settings', 'kehittamo-share-buttons' ) ?></h2>
+            <h2><?php _e( 'Share Buttons Settings', SHARE_BUTTONS_SLUG ) ?></h2>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
@@ -49,6 +49,12 @@ class SettingsPage {
                 submit_button();
             ?>
             </form>
+            <footer class="kehittamo-share-buttons__footer">
+                <a href="https://kehittamo.fi" title="Kehittämö" target="_blank">
+                    <strong><?php _e( 'Developed by Kehittämö', SHARE_BUTTONS_SLUG ); ?></strong>
+                    <img src="<?php echo PLUGIN_URL; ?>/includes/svg/digitoimisto-kehittamo.svg" alt="Kehittämö" />
+                </a>
+            </footer>
         </div>
         <?php
     }
@@ -65,21 +71,21 @@ class SettingsPage {
 
         add_settings_section(
             'kehittamo_share_buttons_default', // ID
-            __( 'Info', 'kehittamo-share-buttons' ), // Title
+            __( 'Info', SHARE_BUTTONS_SLUG ), // Title
             array( $this, 'print_section_info' ), // Callback
             SHARE_BUTTONS_SETTINGS_PAGE_NAME // Page
         );
 
         add_settings_field(
             SHARE_BUTTONS_VISIBLE_POST_TOP, // ID
-            __( 'Show share buttons at the top of posts?', 'kehittamo-share-buttons' ), // Title
+            __( 'Show share buttons at the top of posts?', SHARE_BUTTONS_SLUG ), // Title
             array( $this, 'share_buttons_visible_post_top_callback' ), // Callback
             SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
             'kehittamo_share_buttons_default' // Section
         );
         add_settings_field(
             SHARE_BUTTONS_VISIBLE_POST_BOTTOM, // ID
-            __( 'Show share buttons at the bottom of posts?', 'kehittamo-share-buttons' ), // Title
+            __( 'Show share buttons at the bottom of posts?', SHARE_BUTTONS_SLUG ), // Title
             array( $this, 'share_buttons_visible_post_bottom_callback' ), // Callback
             SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
             'kehittamo_share_buttons_default' // Section

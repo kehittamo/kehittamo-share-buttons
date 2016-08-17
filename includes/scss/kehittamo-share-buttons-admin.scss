@@ -4,4 +4,21 @@
     margin-bottom: 1rem;
     padding-bottom: 2rem;
   }
+  &__footer{
+    text-align: center;
+    a{
+        color: #002832;
+        text-decoration: none;
+        &:hover{
+            color: lighten(#002832, 15);
+        }
+    }
+    img{
+        display: block;
+        margin: 0 auto;
+        max-width: 200px;
+        padding-top: 1rem;
+        width: 100%;
+    }
+  }
 }
