@@ -162,7 +162,9 @@ class FrontEnd {
             $escaped_url = "http://$matched_url[1]" . ",https://$matched_url[1]";
         }
         if ( $escaped_url && $id ) :
-            if ( is_string( $total_shares_count_cache = get_transient( 'total_shares_count_' . $id ) ) ) {
+            // Get current shares from post meta
+            $current_shares = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true );
+            if ( is_string( $total_shares_count_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id ) ) ) {
                 return $total_shares_count_cache;
             }
             // Disable Twitter for now because they do not have this endpoint anymore
@@ -188,9 +190,13 @@ class FrontEnd {
             }
 
             $total_share_count = $total_share_count + $fb_shares + $fb_likes;
+            // If FB returns 0 shares (for any reason) and there's earlier sharecount available in post meta, use it instead
+            if ( 0 === (int) $total_share_count && 0 < (int) $current_shares ) {
+                $total_share_count = $current_shares;
+            }
 
             // Set 5min cache
-            set_transient( 'total_shares_count_' . $id, $total_share_count, 60 * 5 );
+            set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, 60 * 5 );
 
             // Add share count to post meta so the data can be used also elswhere
             update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY,  $total_share_count );
