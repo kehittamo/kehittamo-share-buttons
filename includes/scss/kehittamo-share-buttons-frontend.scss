@@ -1,4 +1,6 @@
 $base-color: #ffffff;
+$font-size: 14px;
+$font-size-md: 16px;
 $border-color: #ccc;
 $toggle-menu-bg: rgba(255, 25, 49, 1);
 $facebook-color: #305891;
@@ -74,8 +76,11 @@ $whatsapp-color: #43d854;
     .total-share-count-text{
       display: block;
       text-transform: uppercase;
-      font-size: 14px;
+      font-size: $font-size;
       font-weight: 900;
+      @include smplus{
+          font-size: $font-size-md;
+      };
     }
   }
   .btn{
@@ -86,19 +91,26 @@ $whatsapp-color: #43d854;
     cursor: pointer;
     display: inline-block;
     font-family: 'Avenir', 'Arial', 'sans-serif';
-    font-size: 17px;
+    font-size: $font-size;
     font-weight: normal;
     line-height: 1.5;
     margin-bottom: 0;
     margin-right: 1rem;
     margin-top: 25px;
-    padding: 1rem;
+    padding: 18px;
     text-align: center;
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+    @include smplus{
+        font-size: $font-size-md;
+    };
     > span{
       display: none;
+      font-size: $font-size;
+      @include smplus{
+          font-size: $font-size-md;
+      };
       @include xsplus{
         display: inline-block;
       }
@@ -110,7 +122,8 @@ $whatsapp-color: #43d854;
       margin-top: 0;
     }
     img{
-      padding-right: 5px;
+      vertical-align: baseline;
+      margin-right: 5px;
     }
     &.fb{
       background-color: $facebook-color;
@@ -131,13 +144,6 @@ $whatsapp-color: #43d854;
       }
       @include smplus{
         display: none;
-      }
-    }
-    > i{
-      color: $base-color;
-      display: block;
-      @include xsplus{
-        display: inline;
       }
     }
   }
