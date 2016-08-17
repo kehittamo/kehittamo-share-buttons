@@ -196,7 +196,7 @@ class FrontEnd {
             }
 
             // Set 5min cache
-            set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, 60 * 5 );
+            set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, MINUTE_IN_SECONDS * 5 );
 
             // Add share count to post meta so the data can be used also elswhere
             update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY,  $total_share_count );
