@@ -3,7 +3,7 @@
     "version": "master",
     "type": "wordpress-plugin",
     "source": {
-        "url": "https://bitbucket.org/kehittamo/kehittamo-share-buttons.git",
+        "url": "https://github.com/kehittamo/kehittamo-share-buttons.git",
         "type": "git",
         "reference": "master"
     }
