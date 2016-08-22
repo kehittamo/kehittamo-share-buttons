@@ -21,8 +21,8 @@ class Share_Buttons_Facebook {
     public function __construct() {
         // Set options
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
-        if ( file_exists( PLUGIN_PATH . 'vendor/autoload.php' ) && null === $this->fb && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_ID ] ) && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
-            require_once( PLUGIN_PATH . 'vendor/autoload.php' );
+        if ( file_exists( PLUGIN_PATH . 'vendor/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php' ) && null === $this->fb && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_ID ] ) && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
+            require_once( PLUGIN_PATH . 'vendor/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php' );
             try {
                 $this->fb = new Facebook\Facebook([
                     'app_id'     => $this->options[ SHARE_BUTTONS_FB_APP_ID ],
