@@ -1,7 +1,7 @@
 <?php
 
 namespace Kehittamo\Plugins\ShareButtons;
-
+use Kehittamo\Plugins\ShareButtons\Facebook;
 
 class FrontEnd {
     /**
@@ -10,13 +10,20 @@ class FrontEnd {
     private $options;
 
     /**
+     * Holds the options of the plugin
+     */
+    private $facebook;
+
+    /**
      * Start up
      */
     public function __construct() {
         // Set options
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
+        require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-facebook.php' );
         add_filter( 'the_content' , array( $this, 'maybe_add_share_buttons' ), 90, 1 );
         add_shortcode( 'share-buttons', array( $this, 'sharebuttons_func' ) );
+        $this->facebook = new \Kehittamo\Plugins\ShareButtons\Share_Buttons_Facebook();
     }
 
 
@@ -153,14 +160,7 @@ class FrontEnd {
     * @return string sharecount as a number
     */
     public function get_share_counts( $id, $url ) {
-
         $escaped_url = esc_url( $url );
-        // Get share count to http and https urls
-        $re = '/^https?:\\/\\/(.{1,})/';
-        preg_match( $re, $escaped_url, $matched_url );
-        if ( sizeof( $matched_url ) === 2 ) {
-            $escaped_url = "http://$matched_url[1]" . ",https://$matched_url[1]";
-        }
         if ( $escaped_url && $id ) :
             // Get current shares from post meta
             $current_shares = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true );
@@ -174,22 +174,17 @@ class FrontEnd {
             // $twitter_shares = '0';
             // $total_share_count = $twitter_shares;
             $total_share_count = '0';
-            $facebook_json = $this->get_data( 'https://api.facebook.com/method/links.getStats?format=json&urls=' . $escaped_url );
+            // Try to get access_token and add it to the url if retrieved
+            $token = $this->facebook->get_acces_token();
+            $fb_url = is_string( $token ) ? 'https://graph.facebook.com/?access_token=' . $token .'&id=' . $escaped_url : 'https://graph.facebook.com/?id=' . $escaped_url;
+            $facebook_json = $this->get_data( $fb_url );
             $facebook_obj = json_decode( $facebook_json );
-            if ( is_array( $facebook_obj ) && sizeof( $facebook_obj ) === 2 ) {
-                foreach ( $facebook_obj as $object ) {
-                    $fb_shares += ( isset( $object->share_count ) && $object->share_count !== $fb_shares ) ? $object->share_count : '0';
-                    $fb_comments += ( isset( $object->commentsbox_count ) && $object->commentsbox_count !== $fb_comments ) ? $object->commentsbox_count : '0';
-                    $fb_likes += ( isset( $object->like_count ) && $object->like_count !== $fb_likes ) ? $object->like_count : '0';
-                }
-            } else {
-                $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
-                $fb_shares = isset( $facebook_obj->share_count ) ? $facebook_obj->share_count : '0';
-                $fb_comments = isset( $facebook_obj->commentsbox_count ) ? $facebook_obj->commentsbox_count : '0';
-                $fb_likes = isset( $facebook_obj->like_count ) ? $facebook_obj->like_count : '0';
-            }
+            $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
+            $fb_shares = isset( $facebook_obj->share->share_count ) ? $facebook_obj->share->share_count : '0';
+            $fb_comments = isset( $facebook_obj->share->comment_count ) ? $facebook_obj->share->comment_count : '0';
 
             $total_share_count = $total_share_count + $fb_shares + $fb_likes;
+
             // If FB returns 0 shares (for any reason) and there's earlier sharecount available in post meta, use it instead
             if ( 0 === (int) $total_share_count && 0 < (int) $current_shares ) {
                 $total_share_count = $current_shares;

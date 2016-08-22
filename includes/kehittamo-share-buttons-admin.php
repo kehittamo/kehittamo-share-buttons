@@ -90,6 +90,20 @@ class SettingsPage {
             SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
             'kehittamo_share_buttons_default' // Section
         );
+        add_settings_field(
+            SHARE_BUTTONS_FB_APP_ID, // ID
+            __( 'Add Facebook App ID', SHARE_BUTTONS_SLUG ), // Title
+            array( $this, 'share_buttons_fb_app_id_callback' ), // Callback
+            SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
+            'kehittamo_share_buttons_default' // Section
+        );
+        add_settings_field(
+            SHARE_BUTTONS_FB_APP_SECRET, // ID
+            __( 'Add Facebook App Secret', SHARE_BUTTONS_SLUG ), // Title
+            array( $this, 'share_buttons_fb_app_secret_callback' ), // Callback
+            SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
+            'kehittamo_share_buttons_default' // Section
+        );
     }
 
     /**
@@ -104,6 +118,12 @@ class SettingsPage {
         }
         if ( isset( $input[ SHARE_BUTTONS_VISIBLE_POST_BOTTOM ] ) ) {
             $new_input[ SHARE_BUTTONS_VISIBLE_POST_BOTTOM ] = absint( $input[ SHARE_BUTTONS_VISIBLE_POST_BOTTOM ] );
+        }
+        if ( isset( $input[ SHARE_BUTTONS_FB_APP_ID ] ) ) {
+            $new_input[ SHARE_BUTTONS_FB_APP_ID ] = esc_attr( $input[ SHARE_BUTTONS_FB_APP_ID ] );
+        }
+        if ( isset( $input[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
+            $new_input[ SHARE_BUTTONS_FB_APP_SECRET ] = esc_attr( $input[ SHARE_BUTTONS_FB_APP_SECRET ] );
         }
 
         return $new_input;
@@ -137,6 +157,26 @@ class SettingsPage {
     public function share_buttons_visible_post_bottom_callback() {
         printf(
             '<input type="checkbox" id="' . SHARE_BUTTONS_VISIBLE_POST_BOTTOM . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_VISIBLE_POST_BOTTOM . ']" value="1"' . checked( 1, $this->options[ SHARE_BUTTONS_VISIBLE_POST_BOTTOM ], false ) . '/>'
+        );
+    }
+
+    /**
+     * Print kehittamo_share_buttons_fb_app_id
+     * TODO: test that app id is valid
+     */
+    public function share_buttons_fb_app_id_callback() {
+        printf(
+            '<input type="text" id="' . SHARE_BUTTONS_FB_APP_ID . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_FB_APP_ID . ']" value="' . $this->options[ SHARE_BUTTONS_FB_APP_ID ] .'" />'
+        );
+    }
+
+    /**
+     * Print kehittamo_share_buttons_fb_app_secret
+     * TODO: test that app secret is valid
+     */
+    public function share_buttons_fb_app_secret_callback() {
+        printf(
+            '<input type="text" id="' . SHARE_BUTTONS_FB_APP_SECRET . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_FB_APP_SECRET . ']" value="' . $this->options[ SHARE_BUTTONS_FB_APP_SECRET ] . '" />'
         );
     }
 }

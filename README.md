@@ -1,3 +1,16 @@
-# Kehittamö Share Buttons
+# Kehittämö Share Buttons
 
-Show FB / Twitter / Whatsapp share buttons in posts 
+Add Facebook, Twitter & Whatsapp share buttons to posts in WordPress
+
+## Installation
+
+* With Composer
+
+```
+composer require kehittamo/kehittamo-share-buttons
+```
+
+* From wordpress.org plugin directory
+```
+TODO
+```
