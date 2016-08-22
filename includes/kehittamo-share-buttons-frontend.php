@@ -1,7 +1,7 @@
 <?php
 
 namespace Kehittamo\Plugins\ShareButtons;
-
+use Kehittamo\Plugins\ShareButtons\Facebook;
 
 class FrontEnd {
     /**
@@ -10,13 +10,20 @@ class FrontEnd {
     private $options;
 
     /**
+     * Holds the options of the plugin
+     */
+    private $facebook;
+
+    /**
      * Start up
      */
     public function __construct() {
         // Set options
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
+        require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-facebook.php' );
         add_filter( 'the_content' , array( $this, 'maybe_add_share_buttons' ), 90, 1 );
         add_shortcode( 'share-buttons', array( $this, 'sharebuttons_func' ) );
+        $this->facebook = new \Kehittamo\Plugins\ShareButtons\Share_Buttons_Facebook();
     }
 
 
@@ -153,7 +160,6 @@ class FrontEnd {
     * @return string sharecount as a number
     */
     public function get_share_counts( $id, $url ) {
-
         $escaped_url = esc_url( $url );
         if ( $escaped_url && $id ) :
             // Get current shares from post meta
@@ -168,7 +174,10 @@ class FrontEnd {
             // $twitter_shares = '0';
             // $total_share_count = $twitter_shares;
             $total_share_count = '0';
-            $facebook_json = $this->get_data( 'https://graph.facebook.com/?id=' . $escaped_url );
+            // Try to get access_token and add it to the url if retrieved
+            $token = $this->facebook->get_acces_token();
+            $fb_url = is_string( $token ) ? 'https://graph.facebook.com/?access_token=' . $token .'&id=' . $escaped_url : 'https://graph.facebook.com/?id=' . $escaped_url;
+            $facebook_json = $this->get_data( $fb_url );
             $facebook_obj = json_decode( $facebook_json );
             $facebook_obj = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
             $fb_shares = isset( $facebook_obj->share->share_count ) ? $facebook_obj->share->share_count : '0';
