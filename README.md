@@ -10,7 +10,4 @@ Add Facebook, Twitter & Whatsapp share buttons to posts in WordPress
 composer require kehittamo/kehittamo-share-buttons
 ```
 
-* From wordpress.org plugin directory
-```
-TODO
-```
+* [From wordpress.org plugin directory](https://wordpress.org/plugins/kehittamo-share-buttons/)

@@ -3,7 +3,7 @@
 Plugin Name: Kehittämö Share Buttons
 Plugin URI: http://www.kehittamo.fi
 Description: Add Facebook, Twitter & Whatsapp share buttons to posts
-Version: 0.2.0alpha
+Version: 0.2.0
 Author: Kehittämö Oy / Janne Saarela
 Author Email: asiakaspalvelu@kehittamo.fi
 License: GPL2
