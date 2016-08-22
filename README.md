@@ -11,3 +11,4 @@ composer require kehittamo/kehittamo-share-buttons
 ```
 
 * [From wordpress.org plugin directory](https://wordpress.org/plugins/kehittamo-share-buttons/)
+    * [Info about SVN & WordPress](https://wordpress.org/plugins/about/svn/)

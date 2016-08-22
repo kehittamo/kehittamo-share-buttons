@@ -4,7 +4,7 @@ Contributors: 0is1
 Tags: Facebook, Twitter, Whatsapp, Social Media, Share Buttons
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 0.2.0
+Stable tag: 0.2.2
 License: GPLv2 or later
 
 Add Facebook, Twitter & Whatsapp (in mobile size) share buttons to posts.
@@ -27,6 +27,14 @@ Please tell us about it: asiakaspalvelu [AT] kehittamo.fi
 [Or open an issue on GitHub](https://github.com/kehittamo/kehittamo-share-buttons)
 
 == Changelog ==
+
+= 0.2.2 =
+
+* Tag new version
+
+= 0.2.1 =
+
+* Fix file structure
 
 = 0.2.0 =
 
