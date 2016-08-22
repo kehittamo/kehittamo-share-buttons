@@ -3,7 +3,7 @@
 Plugin Name: Kehittämö Share Buttons
 Plugin URI: http://www.kehittamo.fi
 Description: Add Facebook, Twitter & Whatsapp share buttons to posts
-Version: 0.1.0
+Version: 0.2.0alpha
 Author: Kehittämö Oy / Janne Saarela
 Author Email: asiakaspalvelu@kehittamo.fi
 License: GPL2
@@ -37,6 +37,10 @@ namespace Kehittamo\Plugins\ShareButtons;
     define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
     define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_POST_META_KEY', '_kehittamo_share_buttons_post_share_count' );
     define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_TRANSIENT_PREFIX_KEY', 'kehittamo_total_shares_count_' );
+    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_ID', 'kehittamo_share_buttons_fb_app_id' );
+    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_SECRET', 'kehittamo_share_buttons_fb_app_secret' );
+    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_TOKEN_TRANSIENT', 'kehittamo_share_buttons_fb_app_token' );
+    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_DEFAULT_API_VERSION', 'v2.7' );
 
 class Load {
 
