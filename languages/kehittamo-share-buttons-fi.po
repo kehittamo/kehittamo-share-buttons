@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kehittamo Share Buttons\n"
-"POT-Creation-Date: 2016-08-17 13:50+0300\n"
-"PO-Revision-Date: 2016-08-17 13:50+0300\n"
+"POT-Creation-Date: 2016-08-22 16:33+0300\n"
+"PO-Revision-Date: 2016-08-22 16:33+0300\n"
 "Last-Translator: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language-Team: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language: fi\n"
@@ -20,30 +20,46 @@ msgstr ""
 
 #: includes/kehittamo-share-buttons-admin.php:27
 #: includes/kehittamo-share-buttons-admin.php:28
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:27
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:28
 msgid "Share Buttons"
 msgstr "Sosiaalisen median jakonapit"
 
 #: includes/kehittamo-share-buttons-admin.php:43
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:43
 msgid "Share Buttons Settings"
 msgstr "Sosiaalisen median jakonappien asetukset"
 
 #: includes/kehittamo-share-buttons-admin.php:54
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:54
 msgid "Developed by Kehittämö"
 msgstr "Lisäosan tarjoaa Digitoimisto Kehittämö"
 
 #: includes/kehittamo-share-buttons-admin.php:74
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:74
 msgid "Info"
 msgstr "Info"
 
 #: includes/kehittamo-share-buttons-admin.php:81
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:81
 msgid "Show share buttons at the top of posts?"
 msgstr "Näytä jakonapit artikkelin yläosassa?"
 
 #: includes/kehittamo-share-buttons-admin.php:88
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:88
 msgid "Show share buttons at the bottom of posts?"
 msgstr "Näytä jakonapit ja jakotilastot artikkelin alaosassa?"
 
-#: includes/kehittamo-share-buttons-admin.php:117
+#: includes/kehittamo-share-buttons-admin.php:95
+msgid "Add Facebook App ID"
+msgstr "Lisää Facebook-sovelluksen ID"
+
+#: includes/kehittamo-share-buttons-admin.php:102
+msgid "Add Facebook App Secret"
+msgstr "Lisää Facebook-sovelluksen Secret"
+
+#: includes/kehittamo-share-buttons-admin.php:137
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:117
 msgid ""
 "By default share buttons are set in to the posts top and bottom. <br /> You "
 "can choose to hide share buttons from top or/and bottom if you want."
@@ -51,11 +67,13 @@ msgstr ""
 "Oletuksena jakonapit näytetään artikkelin ylä- ja alaosassa. <br /> Voit "
 "piilottaa jakonapit halutessasi artikkelin ylä- tai/ja alaosasta."
 
-#: includes/kehittamo-share-buttons-admin.php:118
+#: includes/kehittamo-share-buttons-admin.php:138
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:118
 msgid "You can add share buttons to other content too via shortcode: "
 msgstr "Voit lisätä jakonapit myös shortcoden avulla: "
 
-#: includes/kehittamo-share-buttons-admin.php:120
+#: includes/kehittamo-share-buttons-admin.php:140
+#: svn/trunk/includes/kehittamo-share-buttons-admin.php:120
 msgid ""
 "By default shortcode add buttons with share count. If you want to add "
 "buttons without share counts, use:"
@@ -63,28 +81,41 @@ msgstr ""
 "Oletuksena shortcode lisää jakonapit ja jakomäärän. Jos haluat lisätä vain "
 "jakonapit, käytä tätä shortcodea:"
 
-#: includes/kehittamo-share-buttons-frontend.php:94
-#: includes/kehittamo-share-buttons-frontend.php:102
-#: includes/kehittamo-share-buttons-frontend.php:110
+#: includes/kehittamo-share-buttons-frontend.php:101
+#: includes/kehittamo-share-buttons-frontend.php:109
 #: includes/kehittamo-share-buttons-frontend.php:117
+#: includes/kehittamo-share-buttons-frontend.php:124
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:94
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:102
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:110
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:117
 msgid "Share This on Facebook"
 msgstr "Jaa Facebookissa"
 
-#: includes/kehittamo-share-buttons-frontend.php:95
-#: includes/kehittamo-share-buttons-frontend.php:103
-#: includes/kehittamo-share-buttons-frontend.php:111
+#: includes/kehittamo-share-buttons-frontend.php:102
+#: includes/kehittamo-share-buttons-frontend.php:110
 #: includes/kehittamo-share-buttons-frontend.php:118
+#: includes/kehittamo-share-buttons-frontend.php:125
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:95
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:103
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:111
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:118
 msgid "Share This on Twitter"
 msgstr "Jaa Twitterissä"
 
-#: includes/kehittamo-share-buttons-frontend.php:96
-#: includes/kehittamo-share-buttons-frontend.php:104
-#: includes/kehittamo-share-buttons-frontend.php:112
+#: includes/kehittamo-share-buttons-frontend.php:103
+#: includes/kehittamo-share-buttons-frontend.php:111
 #: includes/kehittamo-share-buttons-frontend.php:119
+#: includes/kehittamo-share-buttons-frontend.php:126
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:96
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:104
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:112
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:119
 msgid "Share This on Whatsapp"
 msgstr "Jaa Whatsappissa"
 
-#: includes/kehittamo-share-buttons-frontend.php:142
+#: includes/kehittamo-share-buttons-frontend.php:149
+#: svn/trunk/includes/kehittamo-share-buttons-frontend.php:142
 msgid "shares"
 msgstr "jakoa"
 
