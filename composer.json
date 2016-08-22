@@ -10,6 +10,13 @@
         }
     ],
     "require":{
+        "php": ">=5.4",
+        "koodimonni/composer-dropin-installer": ">=0.2.4",
         "facebook/php-sdk-v4": "^5.0"
+    },
+    "extra": {
+        "dropin-paths": {
+            "vendor/" :["package:facebook/php-sdk-v4"]
+        }
     }
 }
