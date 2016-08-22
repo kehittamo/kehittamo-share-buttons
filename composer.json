@@ -9,5 +9,7 @@
             "email": "janne.saarela@kehittamo.fi"
         }
     ],
-    "require":{}
+    "require":{
+        "facebook/php-sdk-v4": "^5.0"
+    }
 }
