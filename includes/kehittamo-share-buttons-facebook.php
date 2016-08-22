@@ -2,7 +2,6 @@
 
 namespace Kehittamo\Plugins\ShareButtons;
 use Facebook;
-
 class Share_Buttons_Facebook {
     /**
      * Holds the options of the plugin
@@ -22,8 +21,8 @@ class Share_Buttons_Facebook {
     public function __construct() {
         // Set options
         $this->options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
-        require_once( PLUGIN_PATH . '/vendor/autoload.php' );
-        if ( null === $this->fb && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_ID ] ) && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
+        if ( file_exists( PLUGIN_PATH . 'vendor/autoload.php' ) && null === $this->fb && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_ID ] ) && ! empty( $this->options[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
+            require_once( PLUGIN_PATH . 'vendor/autoload.php' );
             try {
                 $this->fb = new Facebook\Facebook([
                     'app_id'     => $this->options[ SHARE_BUTTONS_FB_APP_ID ],
