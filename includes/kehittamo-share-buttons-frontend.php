@@ -97,14 +97,14 @@ class FrontEnd {
         $new_content_top = '';
         $content_empty = empty( $content );
         if ( $top && ! $content_empty ) {
-            $new_content_top .= "<div class='share-buttons-block top'>";
+            $new_content_top .= "<div class='share-buttons-block top no-print'>";
             $new_content_top .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><img src='" . PLUGIN_URL . "includes/svg/facebook-logo.svg' alt='" . __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'/><span>Facebook</span></a>";
             $new_content_top .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . '&text=' . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/twitter-logo.svg' alt='" . __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ) . "'/><span>Twitter</span></a>";
             $new_content_top .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . '?' . $url . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/whatsapp-logo.svg' alt='" . __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ) . "' /><span>Whatsapp</span></a>";
             $new_content_top .= '</div>';
         }
         if ( $bottom && ! $content_empty ) {
-            $new_content_bottom .= "<div class='share-buttons-block bottom'>";
+            $new_content_bottom .= "<div class='share-buttons-block bottom no-print'>";
             $new_content_bottom .= $this->get_share_counts_html( $id, $url );
             $new_content_bottom .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><img src='" . PLUGIN_URL . "includes/svg/facebook-logo.svg' alt='" . __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'/>Facebook</a>";
             $new_content_bottom .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . '&text=' . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/twitter-logo.svg' alt='" . __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ) . "'/>Twitter</a>";
@@ -113,13 +113,13 @@ class FrontEnd {
         }
         // If content is empty add only one button set to $new_content_top
         if ( $content_empty && $top && ! $bottom ) {
-            $new_content_top .= "<div class='share-buttons-block top'>";
+            $new_content_top .= "<div class='share-buttons-block top no-print'>";
                 $new_content_top .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><img src='" . PLUGIN_URL . "includes/svg/facebook-logo.svg' alt='" . __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'/><span>Facebook</span></a>";
                 $new_content_top .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . '&text=' . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/twitter-logo.svg' alt='" . __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ) . "'/><span>Twitter</span></a>";
                 $new_content_top .= "<a class='share-button btn btn-default whatsapp' href='whatsapp://send?text=" . $title . '?' . $url . "' data-href='" . $url . "' data-text='" . $title . "' title='". __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/whatsapp-logo.svg' alt='" . __( 'Share This on Whatsapp', SHARE_BUTTONS_SLUG ) . "' /><span>Whatsapp</span></a>";
             $new_content_top .= '</div>';
         } elseif ( $content_empty && $bottom ) {
-            $new_content_top .= "<div class='share-buttons-block bottom'>";
+            $new_content_top .= "<div class='share-buttons-block bottom no-print'>";
                 $new_content_top .= $this->get_share_counts_html( $id, $url );
                 $new_content_top .= "<a class='share-button btn btn-default fb' href='http://www.facebook.com/share.php?u=" . $url . "' target='_blank' title='". __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'><img src='" . PLUGIN_URL . "includes/svg/facebook-logo.svg' alt='" . __( 'Share This on Facebook', SHARE_BUTTONS_SLUG ) . "'/><span>Facebook</span></a>";
                 $new_content_top .= "<a class='share-button btn btn-default twitter' href='https://twitter.com/share?url=" . $url . '&text=' . $tweet_text . "' target='_blank' title='". __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ). "'><img src='" . PLUGIN_URL . "includes/svg/twitter-logo.svg' alt='" . __( 'Share This on Twitter', SHARE_BUTTONS_SLUG ) . "'/><span>Twitter</span></a>";
