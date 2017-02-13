@@ -91,7 +91,7 @@ class FrontEnd {
     * @return string $content with share buttons
     */
     private function add_buttons( $id, $url, $title, $content, $top, $bottom ) {
-        $tweet_text = ( strlen( $title ) > 117 ) ? substr( $title, 0, 117 ) . '...' : $title;
+        $tweet_text = ( strlen( $title ) > 113 ) ? mb_substr( $title, 0, 113, 'UTF-8' ) . '...' : $title;
         $new_content = '';
         $new_content_bottom = '';
         $new_content_top = '';
