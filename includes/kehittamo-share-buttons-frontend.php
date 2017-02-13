@@ -183,7 +183,7 @@ class FrontEnd {
             $fb_shares = isset( $facebook_obj->share->share_count ) ? $facebook_obj->share->share_count : '0';
             $fb_comments = isset( $facebook_obj->share->comment_count ) ? $facebook_obj->share->comment_count : '0';
 
-            $total_share_count = $total_share_count + $fb_shares + $fb_likes;
+            $total_share_count = $total_share_count + $fb_shares + $fb_comments;
 
             // If FB returns 0 shares (for any reason) and there's earlier sharecount available in post meta, use it instead
             if ( 0 === (int) $total_share_count && 0 < (int) $current_shares ) {
