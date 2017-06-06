@@ -30,69 +30,86 @@ namespace Kehittamo\Plugins\ShareButtons;
 
 	define( 'Kehittamo\Plugins\ShareButtons\PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 	define( 'Kehittamo\Plugins\ShareButtons\PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SLUG', 'kehittamo-share-buttons' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_NAME', 'kehittamo_share_buttons_settings' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_PAGE_NAME', 'kehittamo-share-buttons-admin' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_TOP', 'share_buttons_visible_post_top' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_POST_META_KEY', '_kehittamo_share_buttons_post_share_count' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_TRANSIENT_PREFIX_KEY', 'kehittamo_total_shares_count_' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_ID', 'kehittamo_share_buttons_fb_app_id' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_SECRET', 'kehittamo_share_buttons_fb_app_secret' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_TOKEN_TRANSIENT', 'kehittamo_share_buttons_fb_app_token' );
-    define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_DEFAULT_API_VERSION', 'v2.7' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SLUG', 'kehittamo-share-buttons' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_NAME', 'kehittamo_share_buttons_settings' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_SETTINGS_PAGE_NAME', 'kehittamo-share-buttons-admin' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_TOP', 'share_buttons_visible_post_top' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_POST_META_KEY', '_kehittamo_share_buttons_post_share_count' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_TRANSIENT_PREFIX_KEY', 'kehittamo_total_shares_count_' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_ID', 'kehittamo_share_buttons_fb_app_id' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_SECRET', 'kehittamo_share_buttons_fb_app_secret' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_TOKEN_TRANSIENT', 'kehittamo_share_buttons_fb_app_token' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_DEFAULT_API_VERSION', 'v2.7' );
 
 class Load {
 
-    /**
-     * Construct the plugin
-     */
-    function __construct() {
+	/**
+	 * Construct the plugin
+	 */
+	function __construct() {
 
-        add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
 
-        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
-        add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
 
-        register_activation_hook( __FILE__, array( $this, 'init_plugin' ) );
+		register_activation_hook( __FILE__, array( $this, 'init_plugin' ) );
 
-        register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
 
-    }
+	}
 
-    /**
-     * Enable plugin by default
-     */
-    function init_plugin() {
-        $options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
-        if ( ! $options ) {
-            $default_settings = array(
-                SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
-                SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
-            );
-            update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
-        }
-    }
+	/**
+	 * Enable plugin by default
+	 */
+	function init_plugin( $network_wide ) {
 
-    function deactivate_plugin() {
-        // TODO
-    }
+		function set_defaults() {
+			$options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
+			if ( ! $options ) {
+				$default_settings = array(
+					SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
+					SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
+				);
+				update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
 
-    /**
-     * Load the plugin and its dependencies
-     */
-    function load_plugin() {
+			}
+		}
+		// activate network wide
+		if ( is_multisite() && $network_wide ) {
+			global $wpdb;
+			foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {
+				switch_to_blog( $blog_id );
+				// run in network context
+				set_defaults();
+				restore_current_blog();
+			}
+		} else {
+			//run in single site context
+			set_defaults();
+		}
+	}
 
-        add_filter( 'script_loader_tag', array( $this, 'add_async_attribute' ), 10, 2 );
+	function deactivate_plugin() {
+		// TODO
+	}
 
-        $this->load_textdomain();
+	/**
+	 * Load the plugin and its dependencies
+	 */
+	function load_plugin() {
 
-        $this->admin();
+		add_filter( 'script_loader_tag', array( $this, 'add_async_attribute' ), 10, 2 );
 
-        add_action( 'init' , array( $this, 'front_end' ) );
+		$this->load_textdomain();
 
-    }
+		$this->admin();
+
+		add_action( 'init' , array( $this, 'front_end' ) );
+
+	}
 
 	/**
 	* Load plugin textdomain.
@@ -101,67 +118,67 @@ class Load {
 		load_plugin_textdomain( SHARE_BUTTONS_SLUG, false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 
-    /**
-     * Plugin admin page
-     */
-    function admin() {
+	/**
+	 * Plugin admin page
+	 */
+	function admin() {
 
-        // Load plugin options page
-        require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-admin.php' );
+		// Load plugin options page
+		require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-admin.php' );
 
-    }
+	}
 
-    /**
-     * Load front end
-     */
-    function front_end() {
+	/**
+	 * Load front end
+	 */
+	function front_end() {
 
-        // Load front end
-        require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-frontend.php' );
+		// Load front end
+		require_once( PLUGIN_PATH . '/includes/kehittamo-share-buttons-frontend.php' );
 
-    }
+	}
 
 
-    /**
-     * Load Frontend Styles
-     */
-    function wp_enqueue_scripts() {
-        // Check if plugin is enabled and include styles / scripts only if is
-        $options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
-        if ( $options ) {
-            // Javascript
-            wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL .'includes/js/kehittamo-share-buttons.min.js', array( 'jquery' ), null, true );
-            wp_enqueue_script( 'kehittamo-share-buttons' );
+	/**
+	 * Load Frontend Styles
+	 */
+	function wp_enqueue_scripts() {
+		// Check if plugin is enabled and include styles / scripts only if is
+		$options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
+		if ( $options ) {
+			// Javascript
+			wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL .'includes/js/kehittamo-share-buttons.min.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'kehittamo-share-buttons' );
 
-            //CSS Styles
-            wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL .'includes/css/kehittamo-share-buttons-frontend.min.css' );
-            wp_enqueue_style( 'kehittamo-share-buttons-frontend' );
-        }
-    }
+			//CSS Styles
+			wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL .'includes/css/kehittamo-share-buttons-frontend.min.css' );
+			wp_enqueue_style( 'kehittamo-share-buttons-frontend' );
+		}
+	}
 
-    /**
-     * Add async attr to script tag
-     */
-    function add_async_attribute( $tag, $handle ) {
-        if ( 'kehittamo-share-buttons' !== $handle ) {
-            return $tag;
-        }
-        return str_replace( ' src', ' async src', $tag );
-    }
+	/**
+	 * Add async attr to script tag
+	 */
+	function add_async_attribute( $tag, $handle ) {
+		if ( 'kehittamo-share-buttons' !== $handle ) {
+			return $tag;
+		}
+		return str_replace( ' src', ' async src', $tag );
+	}
 
-    /**
-     * Load Admin Javascript and Styles
-     */
-    function admin_enqueue_scripts( $hook ) {
-        $screen = get_current_screen();
-        if ( is_admin() && $screen && 'settings_page_' . SHARE_BUTTONS_SETTINGS_PAGE_NAME == $screen->id ) {
+	/**
+	 * Load Admin Javascript and Styles
+	 */
+	function admin_enqueue_scripts( $hook ) {
+		$screen = get_current_screen();
+		if ( is_admin() && $screen && 'settings_page_' . SHARE_BUTTONS_SETTINGS_PAGE_NAME == $screen->id ) {
 
-            // CSS Styles
-            wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.min.css' );
-            wp_enqueue_style( 'kehittamo-share-buttons-admin' );
+			// CSS Styles
+			wp_register_style( 'kehittamo-share-buttons-admin', PLUGIN_URL .'includes/css/kehittamo-share-buttons-admin.min.css' );
+			wp_enqueue_style( 'kehittamo-share-buttons-admin' );
 
-        }
-    }
+		}
+	}
 }
 
 $kehittamo_share_buttons = new \Kehittamo\Plugins\ShareButtons\Load();
