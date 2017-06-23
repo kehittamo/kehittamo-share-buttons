@@ -66,29 +66,33 @@ class Load {
 	 */
 	function init_plugin( $network_wide ) {
 
-		function set_defaults() {
-			$options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
-			if ( ! $options ) {
-				$default_settings = array(
-					SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
-					SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
-				);
-				update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
-
-			}
-		}
 		// activate network wide
 		if ( is_multisite() && $network_wide ) {
 			global $wpdb;
 			foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {
 				switch_to_blog( $blog_id );
 				// run in network context
-				set_defaults();
+				$this->set_defaults();
 				restore_current_blog();
 			}
 		} else {
 			//run in single site context
-			set_defaults();
+			$this->set_defaults();
+		}
+	}
+
+	/**
+	 * Set default options
+	 */
+	function set_defaults() {
+		$options = get_option( SHARE_BUTTONS_SETTINGS_NAME );
+		if ( ! $options ) {
+			$default_settings = array(
+				SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
+				SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
+			);
+			update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
+
 		}
 	}
 
