@@ -106,8 +106,8 @@ class SettingsPage {
 		);
 		add_settings_field(
 			SHARE_BUTTONS_FB_APP_SECRET, // ID
-			__( 'Use default styles', SHARE_BUTTONS_SLUG ), // Title
-			array( $this, 'share_buttons_default_styles_callback' ), // Callback
+			__( 'Disable plugin default styles', SHARE_BUTTONS_SLUG ), // Title
+			array( $this, 'share_buttons_custom_styles_callback' ), // Callback
 			SHARE_BUTTONS_SETTINGS_PAGE_NAME, // Page
 			'kehittamo_share_buttons_default' // Section
 		);
@@ -132,8 +132,8 @@ class SettingsPage {
 		if ( isset( $input[ SHARE_BUTTONS_FB_APP_SECRET ] ) ) {
 			$new_input[ SHARE_BUTTONS_FB_APP_SECRET ] = esc_attr( $input[ SHARE_BUTTONS_FB_APP_SECRET ] );
 		}
-		if ( isset( $input[ SHARE_BUTTONS_USE_DEFAULT_STYLES ] ) ) {
-			$new_input[ SHARE_BUTTONS_USE_DEFAULT_STYLES ] = absint( $input[ SHARE_BUTTONS_USE_DEFAULT_STYLES ] );
+		if ( isset( $input[ SHARE_BUTTONS_USE_CUSTOM_STYLES ] ) ) {
+			$new_input[ SHARE_BUTTONS_USE_CUSTOM_STYLES ] = absint( $input[ SHARE_BUTTONS_USE_CUSTOM_STYLES ] );
 		}
 
 		return $new_input;
@@ -192,9 +192,9 @@ class SettingsPage {
 	/**
 	 * Print share_buttons_default_styles
 	 */
-	public function share_buttons_default_styles_callback() {
+	public function share_buttons_custom_styles_callback() {
 		printf(
-			'<input type="checkbox" id="' . SHARE_BUTTONS_USE_DEFAULT_STYLES . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_USE_DEFAULT_STYLES . ']" value="1"' . checked( 1, $this->options[ SHARE_BUTTONS_USE_DEFAULT_STYLES ], false ) . '/>'
+			'<input type="checkbox" id="' . SHARE_BUTTONS_USE_CUSTOM_STYLES . '" name="kehittamo_share_buttons_settings[' . SHARE_BUTTONS_USE_CUSTOM_STYLES . ']" value="1"' . checked( 1, $this->options[ SHARE_BUTTONS_USE_CUSTOM_STYLES ], false ) . '/>'
 		);
 	}
 }

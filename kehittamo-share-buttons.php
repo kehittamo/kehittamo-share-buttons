@@ -41,7 +41,7 @@ namespace Kehittamo\Plugins\ShareButtons;
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_SECRET', 'kehittamo_share_buttons_fb_app_secret' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_TOKEN_TRANSIENT', 'kehittamo_share_buttons_fb_app_token' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_DEFAULT_API_VERSION', 'v2.7' );
-	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_USE_DEFAULT_STYLES', 'kehittamo_share_buttons_use_default_styles' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_USE_CUSTOM_STYLES', 'kehittamo_share_buttons_use_custom_styles' );
 
 class Load {
 
@@ -71,7 +71,7 @@ class Load {
 			$default_settings = array(
 				SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
 				SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
-				SHARE_BUTTONS_USE_DEFAULT_STYLES  => 1,
+				SHARE_BUTTONS_USE_CUSTOM_STYLES  => 1,
 			);
 			update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
 		}
@@ -134,8 +134,8 @@ class Load {
 			// Javascript
 			wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL . 'includes/js/kehittamo-share-buttons.min.js', array( 'jquery' ), null, true );
 			wp_enqueue_script( 'kehittamo-share-buttons' );
-			// Include default styles only if options => kehittamo_share_buttons_use_default_styles is checked
-			if ( $options[ SHARE_BUTTONS_USE_DEFAULT_STYLES ] ) {
+			// Include default styles only if options => kehittamo_share_buttons_use_custom_styles is NOT checked
+			if ( ! $options[ SHARE_BUTTONS_USE_CUSTOM_STYLES ] ) {
 				//CSS Styles
 				wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL . 'includes/css/kehittamo-share-buttons-frontend.min.css' );
 				wp_enqueue_style( 'kehittamo-share-buttons-frontend' );
