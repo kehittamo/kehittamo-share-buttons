@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kehittamo Share Buttons\n"
-"POT-Creation-Date: 2016-08-17 13:50+0300\n"
-"PO-Revision-Date: 2016-08-17 13:50+0300\n"
+"POT-Creation-Date: 2018-01-22 16:00+0200\n"
+"PO-Revision-Date: 2018-01-22 16:00+0200\n"
 "Last-Translator: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language-Team: Janne Saarela <janne.saarela@kehittamo.fi>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -43,44 +43,56 @@ msgstr ""
 msgid "Show share buttons at the bottom of posts?"
 msgstr ""
 
-#: includes/kehittamo-share-buttons-admin.php:117
+#: includes/kehittamo-share-buttons-admin.php:95
+msgid "Add Facebook App ID"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:102
+msgid "Add Facebook App Secret"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:109
+msgid "Disable plugin default styles"
+msgstr ""
+
+#: includes/kehittamo-share-buttons-admin.php:147
 msgid ""
 "By default share buttons are set in to the posts top and bottom. <br /> You "
 "can choose to hide share buttons from top or/and bottom if you want."
 msgstr ""
 
-#: includes/kehittamo-share-buttons-admin.php:118
+#: includes/kehittamo-share-buttons-admin.php:148
 msgid "You can add share buttons to other content too via shortcode: "
 msgstr ""
 
-#: includes/kehittamo-share-buttons-admin.php:120
+#: includes/kehittamo-share-buttons-admin.php:150
 msgid ""
 "By default shortcode add buttons with share count. If you want to add "
 "buttons without share counts, use:"
 msgstr ""
 
-#: includes/kehittamo-share-buttons-frontend.php:94
-#: includes/kehittamo-share-buttons-frontend.php:102
-#: includes/kehittamo-share-buttons-frontend.php:110
+#: includes/kehittamo-share-buttons-frontend.php:101
+#: includes/kehittamo-share-buttons-frontend.php:109
 #: includes/kehittamo-share-buttons-frontend.php:117
+#: includes/kehittamo-share-buttons-frontend.php:124
 msgid "Share This on Facebook"
 msgstr ""
 
-#: includes/kehittamo-share-buttons-frontend.php:95
-#: includes/kehittamo-share-buttons-frontend.php:103
-#: includes/kehittamo-share-buttons-frontend.php:111
+#: includes/kehittamo-share-buttons-frontend.php:102
+#: includes/kehittamo-share-buttons-frontend.php:110
 #: includes/kehittamo-share-buttons-frontend.php:118
+#: includes/kehittamo-share-buttons-frontend.php:125
 msgid "Share This on Twitter"
 msgstr ""
 
-#: includes/kehittamo-share-buttons-frontend.php:96
-#: includes/kehittamo-share-buttons-frontend.php:104
-#: includes/kehittamo-share-buttons-frontend.php:112
+#: includes/kehittamo-share-buttons-frontend.php:103
+#: includes/kehittamo-share-buttons-frontend.php:111
 #: includes/kehittamo-share-buttons-frontend.php:119
+#: includes/kehittamo-share-buttons-frontend.php:126
 msgid "Share This on Whatsapp"
 msgstr ""
 
-#: includes/kehittamo-share-buttons-frontend.php:142
+#: includes/kehittamo-share-buttons-frontend.php:149
 msgid "shares"
 msgstr ""
 
