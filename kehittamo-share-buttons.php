@@ -71,7 +71,6 @@ class Load {
 			$default_settings = array(
 				SHARE_BUTTONS_VISIBLE_POST_TOP    => 1,
 				SHARE_BUTTONS_VISIBLE_POST_BOTTOM => 1,
-				SHARE_BUTTONS_USE_CUSTOM_STYLES  => 1,
 			);
 			update_option( SHARE_BUTTONS_SETTINGS_NAME, $default_settings );
 		}
