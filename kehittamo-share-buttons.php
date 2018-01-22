@@ -134,6 +134,7 @@ class Load {
 			// Javascript
 			wp_register_script( 'kehittamo-share-buttons', PLUGIN_URL . 'includes/js/kehittamo-share-buttons.min.js', array( 'jquery' ), null, true );
 			wp_enqueue_script( 'kehittamo-share-buttons' );
+			// Include default styles only if options => kehittamo_share_buttons_use_default_styles is checked
 			if ( $options[ SHARE_BUTTONS_USE_DEFAULT_STYLES ] ) {
 				//CSS Styles
 				wp_register_style( 'kehittamo-share-buttons-frontend', PLUGIN_URL . 'includes/css/kehittamo-share-buttons-frontend.min.css' );
