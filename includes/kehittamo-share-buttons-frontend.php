@@ -162,11 +162,12 @@ class FrontEnd {
     public function get_share_counts( $id, $url ) {
         $escaped_url = esc_url( $url );
         if ( $escaped_url && $id ) :
-            // Get current shares from post meta
-            $current_shares = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true );
-            if ( is_string( $total_shares_count_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id ) ) ) {
-                return $total_shares_count_cache;
-            }
+			$total_shares_count_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id );
+			if ( $total_shares_count_cache !== false ) {
+				return $total_shares_count_cache;
+			}
+			// Get current shares from post meta
+			$current_shares = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true );
             // Disable Twitter for now because they do not have this endpoint anymore
             // $twitter_json = $this->get_data( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $escaped_url );
             // $twitter_obj = json_decode( $twitter_json );
