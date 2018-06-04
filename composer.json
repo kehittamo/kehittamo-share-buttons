@@ -2,7 +2,7 @@
     "name": "kehittamo/kehittamo-share-buttons",
     "type": "wordpress-plugin",
     "description": "Add Facebook, Twitter & Whatsapp share buttons to posts in WordPress",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Janne Saarela",
