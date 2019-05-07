@@ -161,10 +161,11 @@ class FrontEnd {
 	* @return string sharecount as a number
 	*/
 	public function get_share_counts( $id, $url ) {
-		$escaped_url = esc_url( $url );
+		$escaped_url = rawurlencode( $url );
+
 		if ( $escaped_url && $id ) :
 			$total_shares_count_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id );
-			if ( $total_shares_count_cache !== false ) {
+			if ( false !== $total_shares_count_cache ) {
 				return $total_shares_count_cache;
 			}
 			// Get current shares from post meta
@@ -176,24 +177,31 @@ class FrontEnd {
 			// $twitter_shares = '0';
 			// $total_share_count = $twitter_shares;
 			$total_share_count = '0';
-			// Try to get access_token and add it to the url if retrieved
-			$token         = $this->facebook->get_acces_token();
-			$fb_url        = is_string( $token ) ? 'https://graph.facebook.com/?access_token=' . $token . '&id=' . $escaped_url : 'https://graph.facebook.com/?id=' . $escaped_url;
-			$facebook_json = $this->get_data( $fb_url );
-			$facebook_obj  = json_decode( $facebook_json );
-			$facebook_obj  = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
-			$fb_shares     = isset( $facebook_obj->share->share_count ) ? $facebook_obj->share->share_count : '0';
-			$fb_comments   = isset( $facebook_obj->share->comment_count ) ? $facebook_obj->share->comment_count : '0';
 
-			$total_share_count = $total_share_count + $fb_shares + $fb_comments;
+			// Try to get access_token and add it to the url if retrieved
+			$token = $this->facebook->get_acces_token();
+			if ( is_string( $token ) && $token ) {
+				$fb_url  = 'https://graph.facebook.com/v3.3/';
+				$fb_url .= '?id=' . $escaped_url;
+				$fb_url .= '&fields=engagement';
+				$fb_url .= "&access_token=$token";
+
+				$facebook_json = $this->get_data( $fb_url );
+				$facebook_obj  = json_decode( $facebook_json );
+				$facebook_obj  = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
+				$fb_shares     = isset( $facebook_obj->engagement->share_count ) ? $facebook_obj->engagement->share_count : '0';
+				$fb_comments   = isset( $facebook_obj->engagement->comment_count ) ? $facebook_obj->engagement->comment_count : '0';
+
+				$total_share_count = $total_share_count + $fb_shares + $fb_comments;
+			}
 
 			// If FB returns 0 shares (for any reason) and there's earlier sharecount available in post meta, use it instead
 			if ( 0 === (int) $total_share_count && 0 < (int) $current_shares ) {
 				$total_share_count = $current_shares;
 			}
 
-			// Set 5min cache
-			set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, MINUTE_IN_SECONDS * 5 );
+			// Set 15min cache
+			set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, MINUTE_IN_SECONDS * 15 );
 
 			// Add share count to post meta so the data can be used also elswhere
 			update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, $total_share_count );
