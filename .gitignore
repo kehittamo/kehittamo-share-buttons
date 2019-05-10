@@ -2,4 +2,6 @@
 !.gitkeep
 !languages/.gitkeep
 .*~
+.*swp
+.*swo
 svn/*
