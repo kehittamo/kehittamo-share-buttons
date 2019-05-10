@@ -37,6 +37,7 @@ namespace Kehittamo\Plugins\ShareButtons;
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_VISIBLE_POST_BOTTOM', 'share_buttons_visible_post_bottom' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_POST_META_KEY', '_kehittamo_share_buttons_post_share_count' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_TRANSIENT_PREFIX_KEY', 'kehittamo_total_shares_count_' );
+	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FACEBOOK_API_LIMIT_REACHED', 'kehittamo_facebook_api_limit_reached' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_ID', 'kehittamo_share_buttons_fb_app_id' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_SECRET', 'kehittamo_share_buttons_fb_app_secret' );
 	define( 'Kehittamo\Plugins\ShareButtons\SHARE_BUTTONS_FB_APP_TOKEN_TRANSIENT', 'kehittamo_share_buttons_fb_app_token' );
