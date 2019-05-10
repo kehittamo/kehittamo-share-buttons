@@ -268,4 +268,3 @@ class FrontEnd {
 }
 
 $kehittamo_share_buttons_front_end = new \Kehittamo\Plugins\ShareButtons\FrontEnd();
-kehittamo_share_buttons_front_end  = new \Kehittamo\Plugins\ShareButtons\FrontEnd();
