@@ -151,7 +151,6 @@ class FrontEnd {
 		return $html;
 	}
 
-
 	/**
 	* Get share counts from Facebook and Twitter based on page/post url
 	*
@@ -161,54 +160,87 @@ class FrontEnd {
 	* @return string sharecount as a number
 	*/
 	public function get_share_counts( $id, $url ) {
-		$escaped_url = rawurlencode( $url );
+		$share_count  = 0;
+		$shares_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id );
+		$type         = 'error';
+		$message      = null;
+		$error_code   = null;
 
-		if ( $escaped_url && $id ) :
-			$total_shares_count_cache = get_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id );
-			if ( false !== $total_shares_count_cache ) {
-				return $total_shares_count_cache;
+		if ( false !== get_transient( SHARE_BUTTONS_FACEBOOK_API_LIMIT_REACHED ) ) {
+			// If Facebook API limit was reached, use post meta.
+			$type    = 'cache';
+			$message = 'Facebook API limit was reached.';
+		} elseif ( false !== $shares_cache ) {
+			// Use transient value for share count if available.
+			$type        = 'cache';
+			$share_count = $shares_cache;
+		} else {
+			try {
+				// If no transient value, then try to fetch.
+				$facebook_access_token = $this->facebook->get_access_token();
+				if ( empty( $facebook_access_token ) ) {
+					throw new \Exception( 'AppID or AppSecret missing for Facebook share count.' );
+				}
+
+				// Request share count from Facebook.
+				$type          = 'fetch';
+				$facebook_api  = 'https://graph.facebook.com/v3.3/';
+				$facebook_api .= '?id=' . rawurlencode( $url );
+				$facebook_api .= '&fields=engagement';
+				$facebook_api .= "&access_token=$facebook_access_token";
+				$request       = wp_remote_get( $facebook_api );
+
+				// Use meta on request error, else parse fresh share count.
+				if ( is_wp_error( $request ) ) {
+					throw new \Exception( $request->get_error_message() );
+				} else {
+					$body = wp_remote_retrieve_body( $request );
+					$data = json_decode( $body );
+
+					if ( isset( $data->error ) ) {
+						throw new \Exception( $data->error->message, $data->error->code );
+					}
+
+					if ( isset( $data->engagement->share_count ) ) {
+						$share_count = intval( $data->engagement->share_count );
+						// Set 30min cache for current page's share count.
+						set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $share_count, MINUTE_IN_SECONDS * 30 );
+					}
+				}
+			} catch ( \Exception $e ) {
+				$type       = 'error';
+				$error_code = $e->getCode();
+				$message    = $e->getMessage();
+				error_log( print_r( $e, true ) );
 			}
-			// Get current shares from post meta
-			$current_shares = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true );
-			// Disable Twitter for now because they do not have this endpoint anymore
-			// $twitter_json = $this->get_data( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $escaped_url );
-			// $twitter_obj = json_decode( $twitter_json );
-			// $twitter_shares = $twitter_obj->count ? $twitter_obj->count : '0';
-			// $twitter_shares = '0';
-			// $total_share_count = $twitter_shares;
-			$total_share_count = '0';
 
-			// Try to get access_token and add it to the url if retrieved
-			$token = $this->facebook->get_acces_token();
-			if ( is_string( $token ) && $token ) {
-				$fb_url  = 'https://graph.facebook.com/v3.3/';
-				$fb_url .= '?id=' . $escaped_url;
-				$fb_url .= '&fields=engagement';
-				$fb_url .= "&access_token=$token";
-
-				$facebook_json = $this->get_data( $fb_url );
-				$facebook_obj  = json_decode( $facebook_json );
-				$facebook_obj  = is_array( $facebook_obj ) ? $facebook_obj[0] : $facebook_obj;
-				$fb_shares     = isset( $facebook_obj->engagement->share_count ) ? $facebook_obj->engagement->share_count : '0';
-				$fb_comments   = isset( $facebook_obj->engagement->comment_count ) ? $facebook_obj->engagement->comment_count : '0';
-
-				$total_share_count = $total_share_count + $fb_shares + $fb_comments;
+			if ( $share_count ) {
+				// Add share count to post meta so the data can be used also elswhere
+				update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, $share_count );
 			}
+		}
 
-			// If FB returns 0 shares (for any reason) and there's earlier sharecount available in post meta, use it instead
-			if ( 0 === (int) $total_share_count && 0 < (int) $current_shares ) {
-				$total_share_count = $current_shares;
-			}
+		if ( 'fetch' !== $type && ! $share_count ) {
+				// Try to get share count from meta on error.
+				$share_count = get_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, true ) ?: 0;
+		}
 
-			// Set 15min cache
-			set_transient( SHARE_BUTTONS_TRANSIENT_PREFIX_KEY . $id, $total_share_count, MINUTE_IN_SECONDS * 15 );
+		$result = [
+			'id'    => $id,
+			'count' => $share_count,
+			'type'  => $type,
+		];
 
-			// Add share count to post meta so the data can be used also elswhere
-			update_post_meta( $id, SHARE_BUTTONS_POST_META_KEY, $total_share_count );
+		if ( isset( $message ) ) {
+			$result['message'] = $message;
+		}
 
-			return $total_share_count;
+		// If Facebook API request limit reached, set global transient for 30mins.
+		if ( 4 === $error_code ) {
+			set_transient( SHARE_BUTTONS_FACEBOOK_API_LIMIT_REACHED, true, MINUTE_IN_SECONDS * 30 );
+		}
 
-		endif;
+		return $result['count'];
 	}
 
 	/**
@@ -236,3 +268,4 @@ class FrontEnd {
 }
 
 $kehittamo_share_buttons_front_end = new \Kehittamo\Plugins\ShareButtons\FrontEnd();
+kehittamo_share_buttons_front_end  = new \Kehittamo\Plugins\ShareButtons\FrontEnd();
